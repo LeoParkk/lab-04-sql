@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import logging
 import os
 
@@ -12,12 +10,6 @@ DBHOST = os.environ.get("DBHOST")
 DBUSER = os.environ.get("DBUSER")
 DBPASS = os.environ.get("DBPASS")
 DBNAME = os.environ.get("DBNAME")
-
-#code below transforms pandas data types to sql data types
-type_mapping = {
-    "int64": "BIGINT",
-    "str": "VARCHAR(255)",
-}
 
 
 def read_data(filename):
