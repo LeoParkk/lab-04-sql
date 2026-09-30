@@ -38,7 +38,7 @@ def load_data(data, table):
         "id BIGINT, `group` VARCHAR(255), first_name VARCHAR(255), "
         "last_name VARCHAR(255), gender VARCHAR(255), email VARCHAR(255))"
     )
-    # Parameterized insert: values are passed separately, never formatted in
+    
     insert_query = (
         f"INSERT INTO `{table}` "
         "(id, `group`, first_name, last_name, gender, email) "
@@ -50,7 +50,7 @@ def load_data(data, table):
         cursor = db.cursor()
         cursor.execute(create_query)
 
-        # Insert rows one at a time, each row passed as a list
+        #inserts rows one at a time, each row passed as a list
         rows = data.values.tolist()
         for record_data in rows:
             cursor.execute(insert_query, record_data)
