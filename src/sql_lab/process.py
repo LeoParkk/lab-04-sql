@@ -11,6 +11,11 @@ DBUSER = os.environ.get("DBUSER")
 DBPASS = os.environ.get("DBPASS")
 DBNAME = os.environ.get("DBNAME")
 
+#step 3
+type_mapping = {
+    "int64": "BIGINT",
+    "str": "VARCHAR(255)",
+}
 
 def read_data(filename):
     """this function loads a given csv file into a data frame"""
@@ -63,7 +68,7 @@ def main():
     data = read_data("MOCK_DATA.csv")
     data = clean_data(data)
     load_data(data, "mock")
-
+    logging.info("pipeline finished!")
 
 if __name__ == "__main__":
     main()
