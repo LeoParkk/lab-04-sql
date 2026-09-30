@@ -45,7 +45,7 @@ def load_data(data, table):
         cursor = db.cursor()
         cursor.execute(create_query)
 
-        # Insert rows one at a time, each row passed as a tuple
+        # Insert rows one at a time, each row passed as a list
         rows = data.values.tolist()
         for record_data in rows:
             cursor.execute(insert_query, record_data)
