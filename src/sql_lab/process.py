@@ -20,14 +20,14 @@ type_mapping = {
 def read_data(filename):
     """this function loads a given csv file into a data frame"""
     data = pd.read_csv(filename)
-    logging.info(f"Read {len(data)} rows from {filename}")
+    logging.info(f"Done with reading {len(data)} rows from {filename}")
     return data
 
 
 def clean_data(data):
     """this function cleans data by removes rows with missing values"""
     data = data.dropna()
-    logging.info(f"{len(data)} rows left after cleaning")
+    logging.info(f"{len(data)} rows are left after cleaning!")
     return data
 
 
@@ -58,9 +58,9 @@ def load_data(data, table):
         db.commit()
         cursor.close()
         db.close()
-        logging.info(f"Inserted {len(data)} rows into {table}")
+        logging.info(f"success, inserted {len(data)} rows into {table}")
     except mysql.connector.Error as e:
-        logging.error(f"Database error: {e}")
+        logging.error(f"fail, database error: {e}")
 
 
 def main():

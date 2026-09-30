@@ -21,7 +21,7 @@ def get_data_by_group(value):
     try:
         cur.execute(query, (value,))
         results = cur.fetchall()
-        logging.info(f"Found {len(results)} rows where group = {value}")
+        logging.info(f"{len(results)} rows found where group is {value}")
         return results
     except mysql.connector.Error as e:
         logging.error(f"MySQL Error: {e}")
@@ -34,7 +34,7 @@ def plot_counts(groupby):
     try:
         cur.execute(query)
         results = cur.fetchall()
-        logging.info(f"Counted rows by {groupby}")
+        logging.info(f"counted rows by {groupby}")
         return results
     except mysql.connector.Error as e:
         logging.error(f"MySQL Error: {e}")
