@@ -1,0 +1,4 @@
+name	location	post_id	title
+Bob	LA	2	yoohoo
+BOBBY	LA	3	hi
+Bobby Jr	LA	4	bye
