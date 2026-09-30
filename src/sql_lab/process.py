@@ -36,21 +36,24 @@ def clean_data(data):
 
 def load_data(data, table):
     """this function creates a table, and inserts each row into it"""
-    columns = []
-    for col, dtype in data.dtypes.items():
-        columns.append(f"`{col}` {type_mapping[str(dtype)]}")
-    create_query = f"CREATE TABLE IF NOT EXISTS `{table}` ({', '.join(columns)})"
-
-    col_names = ", ".join(f"`{col}`" for col in data.columns)
-    placeholders = ", ".join(["%s"] * len(data.columns))
-    insert_query = f"INSERT INTO `{table}` ({col_names}) VALUES ({placeholders})"
+    create_query = (
+        f"CREATE TABLE IF NOT EXISTS `{table}` ("
+        "id BIGINT, `group` VARCHAR(255), first_name VARCHAR(255), "
+        "last_name VARCHAR(255), gender VARCHAR(255), email VARCHAR(255))"
+    )
+    # Parameterized insert: values are passed separately, never formatted in
+    insert_query = (
+        f"INSERT INTO `{table}` "
+        "(id, `group`, first_name, last_name, gender, email) "
+        "VALUES (%s, %s, %s, %s, %s, %s)"
+    )
 
     try:
         db = mysql.connector.connect(host=DBHOST, user=DBUSER, password=DBPASS, database=DBNAME)
         cursor = db.cursor()
         cursor.execute(create_query)
 
-        # goes through each row one by one, with paramterized values
+        # Insert rows one at a time, each row passed as a tuple
         for row in data.itertuples(index=False):
             cursor.execute(insert_query, row)
 
